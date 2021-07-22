@@ -206,13 +206,11 @@ export default {
     },
 
     changeProcess(process) {
-      this.process = process;
       if(!this.source) {
-        this.$router.push('/admin/farm/'+this.process+'/'+this.farmId);
+        this.$router.push('/admin/farm/'+process+'/'+this.farmId);
       } else {
-        this.$router.push('/admin/farm/'+this.process+'/'+this.farmId+'/'+this.source);
+        this.$router.push('/admin/farm/'+process+'/'+this.farmId+'/'+this.source);
       }
-      this.getFarm({ farmId: this.farmId });
     },
     backLink() {
       if(!this.source) return '/admin/farms';

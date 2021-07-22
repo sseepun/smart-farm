@@ -4,13 +4,15 @@ import { auth } from './auth.store'
 import { alert } from './alert.store'
 import { user } from './user.store'
 import { farm } from './farm.store'
+import { socket } from './socket.store'
 
 const store = createStore({
   modules: {
     auth,
     alert,
     user,
-    farm
+    farm,
+    socket
   }
 })
 

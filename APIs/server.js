@@ -46,35 +46,27 @@ server = app.listen(PORT, () => {
 
 
 // Socket.io
-// const io = require('socket.io')(server, {
-//   cors: {
-//     origin: /localhost$/,
-//     methods: ['GET', 'POST'],
-//     credentials: true
-//   }
-// });
+const io = require('socket.io')(server, {
+  cors: {
+    origin: /localhost$/,
+    methods: ['GET', 'POST'],
+    credentials: false
+  }
+});
 
-// io.on('connection', (socket) => {
-//   socket.on('join-with-id',(data) => {
-//     socket.join(data.user_id);
-//     db.User.findById(data.user_id).exec((err,user) => {
-//       io.in(data.user_id).emit('receive-notify', {
-//         user_id: data.user_id,
-//         notification:  user.notification
-//       });
-//     });
-//   });
-  
-//   socket.on('join', (data) => {
-//     socket.join(data.job_id);
-//   });
+io.on('connection', (socket) => {
+  socket.on('join', (data) => {
+    console.log(data);
+    socket.join(data);
+  });
 
-//   socket.on('disconnect', () => {
+  socket.on('disconnect', () => {
+    console.log('Diasdasdsd')
+  });
+});
 
-//   });
-// });
 
-// connect to database
+// Connect to database
 db.mongoose.connect(process.env.DB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -87,4 +79,6 @@ db.mongoose.connect(process.env.DB, {
   process.exit();
 });
 
+
+// Initiate app
 module.exports = app;

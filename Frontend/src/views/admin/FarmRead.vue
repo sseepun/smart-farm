@@ -55,7 +55,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      users: 'user/list',
       farm: 'farm/single'
     })
   },
@@ -66,25 +65,21 @@ export default {
       else if(this.source == 'profile') this.navActiveIndex = 3;
     }
     this.getFarm({ farmId: this.farmId });
+    this.socketTest();
   },
   methods: {
     ...mapActions({
       updateAlert: 'alert/updateAlert',
       getFarm: 'farm/getSingle',
-      createFarm: 'farm/create',
-      updateFarm: 'farm/update',
-      deleteFarm: 'farm/delete',
-      getUserList: 'user/getList'
+      socketTest: 'socket/testConnection'
     }),
 
     changeProcess(process) {
-      this.process = process;
       if(!this.source) {
-        this.$router.push('/admin/farm/'+this.process+'/'+this.farmId);
+        this.$router.push('/admin/farm/'+process+'/'+this.farmId);
       } else {
-        this.$router.push('/admin/farm/'+this.process+'/'+this.farmId+'/'+this.source);
+        this.$router.push('/admin/farm/'+process+'/'+this.farmId+'/'+this.source);
       }
-      this.getFarm({ farmId: this.farmId });
     },
     backLink() {
       if(!this.source) return '/admin/farms';
