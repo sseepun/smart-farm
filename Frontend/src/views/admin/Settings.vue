@@ -2,7 +2,7 @@
   <div class="main-wrapper">
     <NavLeft :activeIndex="navActiveIndex" />
     
-    <div class="main-content">
+    <div class="main-content bg-plain">
       <NavTop page="การตั้งค่า" />
       
       <div class="middle-sidebar-bottom header-padding pb-4" data-aos="fade-up" data-aos-delay="0">

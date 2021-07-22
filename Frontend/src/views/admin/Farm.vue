@@ -52,40 +52,6 @@
       </div>
     </template>
     
-    <!-- Read -->
-    <template v-else-if="process == 'read'">
-      <div v-if="farm" class="main-content bg-plain">
-        <NavTop page="ฟาร์ม" />
-        <div class="middle-sidebar-bottom header-padding pb-4" data-aos="fade-up" data-aos-delay="0">
-          <div class="middle-sidebar-left pr-0">
-            <div class="d-flex ai-center jc-space-between fw-wrap">
-              <div class="mr-2 mb-3 mb-md-0">
-                <h2 class="fw-600 font-lg m-0">{{farm.name}}</h2>
-                <h6 class="font-xsss text-grey-600 fw-400 m-0 mt-1">
-                  {{farm.description}}
-                </h6>
-              </div>
-              <div class="btns">
-                <router-link 
-                  :to="backLink()" 
-                  class="btn px-3 py-2 m-0 bg-current font-xsss fw-500 text-white mr-2"
-                >
-                  ย้อนกลับ
-                </router-link>
-                <a 
-                  href="javascript:" @click="changeProcess('update')" 
-                  class="btn px-3 py-2 m-0 text-current bcolor-current font-xsss fw-500"
-                >
-                  แก้ไข
-                </a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </template>
-    
     <!-- Update -->
     <template v-else-if="process == 'update'">
       <div v-if="farm" class="main-content bg-plain">

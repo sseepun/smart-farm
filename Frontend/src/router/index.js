@@ -89,9 +89,9 @@ const routes = [
     beforeEnter: (to, from, next) => guardIsAdmin(to, from, next)
   },
   {
-    path: '/admin/farm/:process/:id?',
-    name: 'AdminFarmPage',
-    component: () => import('../views/admin/Farm.vue'),
+    path: '/admin/farm/read/:id?/:source?',
+    name: 'AdminFarmReadPage',
+    component: () => import('../views/admin/FarmRead.vue'),
     beforeEnter: (to, from, next) => guardIsAdmin(to, from, next)
   },
   {
