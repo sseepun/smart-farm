@@ -17,7 +17,7 @@ exports.initial = async () => {
         status: true, is_admin: true
       }).save();
       const adminDetail = await new db.UserDetail({
-        firstname: 'General', lastname: 'Admin'
+        user: admin, firstname: 'General', lastname: 'Admin'
       }).save();
       admin.detail = adminDetail;
       await admin.save();

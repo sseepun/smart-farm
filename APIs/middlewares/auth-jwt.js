@@ -6,19 +6,20 @@ const db = require('../models');
 // Verify JWT
 verifyToken = async (req, res, next) => {
   try {
-    const token = req.cookies.accessToken;
-    if (!token) {
-      return res.status(403).send({message: 'No token provided.'});
+    const authHeader = req.headers['authorization'].split(' ');
+    if(authHeader.length != 2 || authHeader[0] != 'Bearer') {
+      return res.status(403).send({message: 'No bearer token provided.'});
     }
+    
+    const token = authHeader[1];
     jwt.verify(token, config.secret, (err, decoded) => {
       if (err) {
         return res.status(500).send({message: 'Internal server error.'});
       }
-      req.userId = decoded.id;
+      req.user_id = decoded.id;
       next();
     })
-  }
-  catch (err) {
+  } catch (err) {
     return res.status(500).send({message: 'Internal server error.'});
   }
 };

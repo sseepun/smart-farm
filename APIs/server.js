@@ -17,12 +17,12 @@ require('dotenv').config();
 
 
 // Give permission for fetch resource
-// const corsOptions = {
-//   origin: ['', ''],
-//   credentials: true,
-//   optionsSuccessStatus: 200
-// };
-// app.use(cors(corsOptions));
+const corsOptions = {
+  origin: [ new RegExp('localhost:3000$') ],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 
 // Parse requests of content-type - application/json
 app.use(bodyParser.json());

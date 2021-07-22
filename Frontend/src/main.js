@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 
-axios.defaults.baseURL = process.env.VUE_API_URL
+axios.defaults.baseURL = process.env.VUE_APP_API_URL
 axios.defaults.withCredentials = true
 
 const app = createApp(App)
@@ -27,18 +27,3 @@ app.component('NavTop', NavTop)
 store.dispatch('auth/checkSignin')
 app.use(store)
 app.use(store).use(router).mount('#app')
-
-// axios.interceptors.response.use(
-//   response => {
-//     return response
-//   },
-//   err => {        
-//     if(!err.response){
-//         return Promise.reject(err)
-//     }else if(err.response.status === 401 && err.response.data.message === 'Not logged in'){
-//       store.dispatch('authentication/signout')
-//       router.push('/')
-//     }
-//     return Promise.reject(err)
-//   }
-// );

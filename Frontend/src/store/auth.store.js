@@ -19,25 +19,19 @@ export const auth = {
   // Asynchronous 
   actions: {
     checkSignin({ dispatch, commit }) {
-      // var that = this;
-      // if (that.state.user && that.state.user.refresh_token) {
-      //   authService.refreshToken(that.state.user.refresh_token)
-      //     .then(res => {
-      //       if (res.response_status == 'Success') {
-      //         let user = that.state.user;
-      //         user.access_token = res.result.access_token;
-      //         user.refresh_token = res.result.refresh_token;
-      //         commit('signinSuccess', user);
-      //       } else {
-      //         dispatch('signout');
-      //       }
-      //     })
-      //     .catch(err => {
-      //       dispatch('signout');
-      //     });
-      // } else {
-      //   commit('signout');
-      // }
+      var accessToken = localStorage.getItem(`${process.env.VUE_APP_PREFIX}_TOKEN`);
+      var refreshToken = localStorage.getItem(`${process.env.VUE_APP_PREFIX}_REFRESH`);
+      if (accessToken && refreshToken) {
+        authService.refreshToken(refreshToken)
+          .then(data => {
+            commit('signinSuccess', data);
+          })
+          .catch(err => {
+            dispatch('signout');
+          });
+      } else {
+        commit('signout');
+      }
     },
     signin({ dispatch, commit }, input) {
       return new Promise((resolve, reject) => {
@@ -45,11 +39,11 @@ export const auth = {
           .then(data => {
             commit('signinSuccess', data);
             commit('alert/update', { type: 'Success', message: 'เข้าสู่ระบบเรียบร้อยแล้ว' }, { root: true });
-            if(data.isAdmin) router.push('/admin/dashboard');
+            if(data.user.isAdmin) router.push('/admin/dashboard');
             else router.push('/user/dashboard');
           })
           .catch(err => {
-            console.log(err);
+            commit('alert/update', { type: 'Warning', message: err.message }, { root: true });
             reject(err);
           });
       });
@@ -68,7 +62,7 @@ export const auth = {
             resolve(data);
           })
           .catch(err => {
-            console.log(err);
+            commit('alert/update', { type: 'Warning', message: err.message }, { root: true });
             reject(err);
           });
       });
@@ -98,23 +92,27 @@ export const auth = {
 
   // Synchronous
   mutations: {
-    signinSuccess(state, user) {
-      state.user = user;
-      localStorage.setItem(`${process.env.VUE_APP_PREFIX}_USER`, JSON.stringify(user));
+    signinSuccess(state, data) {
+      state.user = data.user;
+      localStorage.setItem(`${process.env.VUE_APP_PREFIX}_USER`, JSON.stringify(data.user));
+      localStorage.setItem(`${process.env.VUE_APP_PREFIX}_TOKEN`, data.accessToken);
+      localStorage.setItem(`${process.env.VUE_APP_PREFIX}_REFRESH`, data.refreshToken);
     },
     signinFailed(state) {
       state.user = null;
       localStorage.removeItem(`${process.env.VUE_APP_PREFIX}_USER`);
+      localStorage.removeItem(`${process.env.VUE_APP_PREFIX}_TOKEN`);
+      localStorage.removeItem(`${process.env.VUE_APP_PREFIX}_REFRESH`);
     },
     signout(state) {
       state.user = null;
       localStorage.removeItem(`${process.env.VUE_APP_PREFIX}_USER`);
+      localStorage.removeItem(`${process.env.VUE_APP_PREFIX}_TOKEN`);
+      localStorage.removeItem(`${process.env.VUE_APP_PREFIX}_REFRESH`);
       router.push('/auth/signin');
     },
 
     updateSuccess(state, user) {
-      user.accessToken = state.user.accessToken;
-      user.refreshToken = state.user.refreshToken;
       state.user = user;
       localStorage.setItem(`${process.env.VUE_APP_PREFIX}_USER`, JSON.stringify(user));
     }

@@ -50,6 +50,7 @@ export default {
 
     onSubmit() {
       this.signin(this.dataset);
+      this.dataset.password = '';
       this.$router.push('/user/dashboard');
     }
   }

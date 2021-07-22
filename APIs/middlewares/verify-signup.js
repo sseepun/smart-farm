@@ -48,7 +48,7 @@ adminUpdateUserCheckDuplicateEmail = async (req, res, next) => {
   }
 }
 
-const verifySignUp = {
+const verifySignup = {
   checkDuplicateUsernameOrEmail,
   adminUpdateUserCheckDuplicateUsername,
   adminUpdateUserCheckDuplicateEmail,

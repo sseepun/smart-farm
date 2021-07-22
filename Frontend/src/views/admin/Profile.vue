@@ -27,17 +27,9 @@
                     {{user.email}}
                   </span>
                 </div>
-                <div class="col-xl-4 col-lg-6">
-                  <h2 class="display5-size text-white fw-700 lh-1 m-0 mt-4">
-                    {{farms? farms.length: 0}} 
-                    <span class="text-white font-sm fw-600 mt-0 lh-3">ฟาร์ม</span>
-                    <router-link to="/user/dashboard">
-                      <i class="feather-arrow-up-right text-success font-xl ml-2"></i>
-                    </router-link>
-                  </h2>
-                </div>
+                <div class="col-xl-4 col-lg-6"></div>
                 <div class="col-xl-3 mt-4">
-                  <router-link to="/user/profile-update" class="btn px-4 py-2 m-0 bg-current font-xss fw-500 text-white">
+                  <router-link to="/admin/profile-update" class="btn px-4 py-2 m-0 bg-current font-xss fw-500 text-white">
                     แก้ไขข้อมูลส่วนตัว
                   </router-link>
                 </div>
@@ -57,26 +49,17 @@ import { onMounted } from '../../helpers/frontend';
 import { mapGetters, mapActions, mapState } from 'vuex';
 
 export default {
-  name: 'UserProfilePage',
+  name: 'AdminProfilePage',
   data() {
     return {
-      navActiveIndex: 1
+      navActiveIndex: 3
     };
   },
   computed: {
     ...mapGetters({
-      user: 'auth/user',
-      farms: 'farm/list'
+      user: 'auth/user'
     })
   },
-  mounted() {
-    onMounted();
-    this.getFarmList({ user: this.user });
-  },
-  methods: {
-    ...mapActions({
-      getFarmList: 'farm/getList'
-    })
-  }
+  mounted() { onMounted(); }
 }
 </script>

@@ -65,6 +65,24 @@ const routes = [
     component: () => import('../views/admin/Dashboard.vue'),
     beforeEnter: (to, from, next) => guardIsAdmin(to, from, next)
   },
+  {
+    path: '/admin/profile',
+    name: 'AdminProfilePage',
+    component: () => import('../views/admin/Profile.vue'),
+    beforeEnter: (to, from, next) => guardIsAdmin(to, from, next)
+  },
+  {
+    path: '/admin/profile-update',
+    name: 'AdminProfileUpdatePage',
+    component: () => import('../views/admin/ProfileUpdate.vue'),
+    beforeEnter: (to, from, next) => guardIsAdmin(to, from, next)
+  },
+  {
+    path: '/admin/settings',
+    name: 'AdminSettingsPage',
+    component: () => import('../views/admin/Settings.vue'),
+    beforeEnter: (to, from, next) => guardIsAdmin(to, from, next)
+  },
 
 ];
 

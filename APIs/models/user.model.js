@@ -12,7 +12,7 @@ const User = mongoose.model(
     is_admin: Boolean,
     detail: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'UserDetail'
+      ref: 'user_detail'
     },
     refresh_token: String,
     created_at: String,

@@ -11,7 +11,7 @@
           <div class="middle-wrap">
             <div class="card w-100 border-0 bg-white shadow-xs p-0 mb-4">
               <div class="card-body p-4 w-100 bg-current border-0 d-flex rounded-lg">
-                <router-link to="/user/profile" class="d-inline-block mt-2">
+                <router-link to="/admin/profile" class="d-inline-block mt-2">
                   <i class="ti-arrow-left font-sm text-white"></i>
                 </router-link>
                 <h4 class="font-sm text-white fw-500 ml-4 mb-0 mt-2">แก้ไขข้อมูลส่วนตัว</h4>
@@ -79,7 +79,7 @@ import { onMounted } from '../../helpers/frontend';
 import { mapGetters, mapActions, mapState } from 'vuex';
 
 export default {
-  name: 'UserProfileUpdatePage',
+  name: 'AdminProfileUpdatePage',
   data() {
     return {
       navActiveIndex: 3,
@@ -117,7 +117,7 @@ export default {
     onSubmit() {
       var that = this;
       that.userUpdate(that.dataset).then(function(){
-        that.$router.push('/user/profile');
+        that.$router.push('/admin/profile');
       });
     }
   }

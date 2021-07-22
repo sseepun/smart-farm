@@ -15,6 +15,7 @@
           </a>
         </div>
 
+        <!-- Admin -->
         <ul v-if="user.isAdmin" class="mb-3">
           <li class="logo d-none d-xl-block d-lg-block"></li>
           <li>
@@ -28,14 +29,42 @@
           </li>
           <li>
             <router-link
-              :to="this.url+'/members'" class="nav-content-bttn m-0" 
-              :class="{ 'active': activeIndex == 2 }"
+              :to="this.url+'/users'" class="nav-content-bttn m-0" 
+              :class="{ 'active': activeIndex == 1 }"
             >
-              <i class="feather-user font-sm mr-3"></i>
+              <i class="feather-users font-sm mr-3"></i>
               <span class="fw-500 font-xss">บัญชีผู้ใช้</span>
             </router-link>
           </li>
+          <li>
+            <router-link
+              :to="this.url+'/farms'" class="nav-content-bttn m-0" 
+              :class="{ 'active': activeIndex == 2 }"
+            >
+              <i class="feather-feather font-sm mr-3"></i>
+              <span class="fw-500 font-xss">ฟาร์มทั้งหมด</span>
+            </router-link>
+          </li>
+          <li>
+            <router-link
+              :to="this.url+'/profile'" class="nav-content-bttn m-0" 
+              :class="{ 'active': activeIndex == 3 }"
+            >
+              <i class="feather-user font-sm mr-3"></i>
+              <span class="fw-500 font-xss">ข้อมูลส่วนตัว</span>
+            </router-link>
+          </li>
+          <li>
+            <router-link
+              :to="this.url+'/settings'" class="nav-content-bttn m-0" 
+              :class="{ 'active': activeIndex == 4 }"
+            >
+              <i class="feather-settings font-sm mr-3"></i>
+              <span class="fw-500 font-xss">การตั้งค่า</span>
+            </router-link>
+          </li>
         </ul>
+        <!-- User -->
         <ul v-else class="mb-3">
           <li class="logo d-none d-xl-block d-lg-block"></li>
           <li>
@@ -72,24 +101,59 @@
   </nav>
   
   <div v-if="user" class="app-footer border-0 shadow-lg" style="justify-content:space-evenly;">
-    <router-link
-      :to="this.url+'/dashboard'" class="nav-content-bttn" 
-      :class="{ 'active': activeIndex == 0 }"
-    >
-      <i class="feather-home"></i>
-    </router-link>
-    <router-link
-      :to="this.url+'/profile'" class="nav-content-bttn mx-4" 
-      :class="{ 'active': activeIndex == 1 }"
-    >
-      <i class="feather-user"></i>
-    </router-link>
-    <router-link
-      :to="this.url+'/settings'" class="nav-content-bttn m-0" 
-      :class="{ 'active': activeIndex == 2 }"
-    >
-      <i class="feather-settings"></i>
-    </router-link>
+    <!-- Admin -->
+    <template v-if="user.isAdmin">
+      <router-link
+        :to="this.url+'/dashboard'" class="nav-content-bttn" 
+        :class="{ 'active': activeIndex == 0 }"
+      >
+        <i class="feather-home"></i>
+      </router-link>
+      <router-link
+        :to="this.url+'/users'" class="nav-content-bttn mx-4" 
+        :class="{ 'active': activeIndex == 1 }"
+      >
+        <i class="feather-users"></i>
+      </router-link>
+      <router-link
+        :to="this.url+'/farms'" class="nav-content-bttn m-0" 
+        :class="{ 'active': activeIndex == 2 }"
+      >
+        <i class="feather-feather"></i>
+      </router-link>
+      <router-link
+        :to="this.url+'/profile'" class="nav-content-bttn m-0" 
+        :class="{ 'active': activeIndex == 3 }"
+      >
+        <i class="feather-user"></i>
+      </router-link>
+      <router-link
+        :to="this.url+'/settings'" class="nav-content-bttn m-0" 
+        :class="{ 'active': activeIndex == 4 }"
+      >
+        <i class="feather-settings"></i>
+      </router-link>
+    </template>
+    <template v-else>
+      <router-link
+        :to="this.url+'/dashboard'" class="nav-content-bttn" 
+        :class="{ 'active': activeIndex == 0 }"
+      >
+        <i class="feather-home"></i>
+      </router-link>
+      <router-link
+        :to="this.url+'/profile'" class="nav-content-bttn mx-4" 
+        :class="{ 'active': activeIndex == 1 }"
+      >
+        <i class="feather-user"></i>
+      </router-link>
+      <router-link
+        :to="this.url+'/settings'" class="nav-content-bttn m-0" 
+        :class="{ 'active': activeIndex == 2 }"
+      >
+        <i class="feather-settings"></i>
+      </router-link>
+    </template>
   </div>
 
 </template>

@@ -1,5 +1,6 @@
 module.exports = function(app) {
   var router = require('express').Router();
+  const { authJwt } = require('../middlewares');
   const AuthController = require('../controllers/auth.controller');
 
   app.use(function(req, res, next) {
@@ -10,9 +11,9 @@ module.exports = function(app) {
     next();
   });
 
-  router.get(
-    '/check-token',
-    AuthController.checkToken
+  router.post(
+    '/refresh-token',
+    AuthController.refreshToken
   );
 
   router.post(
@@ -20,9 +21,10 @@ module.exports = function(app) {
     AuthController.signin
   );
 
-  router.get(
-    '/clear-cookie',
-    AuthController.clearCookie
+  router.patch(
+    '/profile',
+    [ authJwt.verifyToken ],
+    AuthController.profileUpdate
   );
 
   app.use('/auth', router);

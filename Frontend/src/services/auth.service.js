@@ -1,5 +1,5 @@
 const axios = require('axios');
-import { apiHeader } from '../helpers/header';
+import { apiHeader, apiHeaderFormData } from '../helpers/header';
 import { User } from '../models';
 
 export const authService = {
@@ -11,27 +11,27 @@ export const authService = {
 
 function signin(input) {
   return new Promise((resolve, reject) => {
-    // axios({
-    //   method: 'POST',
-    //   url: `${process.env.VUE_API_URL}auth/signin`,
-    //   headers: { 'Content-Type': 'application/json' },
-    //   data: {
-    //     auth: auth,
-    //     password: password,
-    //     device_token: '',
-    //     gant_type: 'password'
-    //   },
-    // })
-    // .then(res => {
-    //   resolve(res.data);
-    // })
-    // .catch(err => {
-    //   resolve(err.response.data);
-    // });
-    resolve(new User({
-      id: 1, username: 'sseepun', email: 'sarun.seepun@gmail.com',
-      access_token: 'access_token', refresh_token: 'refresh_token',
-    }));
+    axios({
+      method: 'POST',
+      url: `auth/signin`,
+      headers: { 'Content-Type': 'application/json' },
+      data: {
+        username: input.username,
+        password: input.password
+      },
+    }).then(res => {
+      if (res.status == 200) {
+        resolve({
+          user: new User(res.data),
+          accessToken: res.data.access_token,
+          refreshToken: res.data.refresh_token
+        });
+      } else {
+        reject(res.statusText);
+      }
+    }).catch(err => {
+      reject(err.response.data);
+    });
   });
 }
 
@@ -39,37 +39,43 @@ function refreshToken(token) {
   return new Promise((resolve, reject) => {
     axios({
       method: 'POST',
-      url: `${process.env.VUE_API_URL}auth/signin`,
+      url: `auth/refresh-token`,
       headers: { 'Content-Type': 'application/json' },
       data: {
-        refresh_token: token,
-        gant_type: 'refresh_token'
+        token: token,
       },
-    })
-    .then(res => {
-      resolve(res.data);
-    })
-    .catch(err => {
-      resolve(err.response.data);
+    }).then(res => {
+      if (res.status == 200) {
+        resolve({
+          user: new User(res.data),
+          accessToken: res.data.access_token,
+          refreshToken: res.data.refresh_token
+        });
+      } else {
+        reject(res.statusText);
+      }
+    }).catch(err => {
+      reject(err.response.data);
     });
   });
 }
 
 function update(dataset) {
   return new Promise((resolve, reject) => {
-    // axios({
-    //   method: 'PATCH',
-    //   url: `${process.env.VUE_API_URL}farm_items/update`,
-    //   headers: apiHeader(),
-    //   data: dataset
-    // })
-    //   .then(res => {
-    //     resolve(res.data);
-    //   })
-    //   .catch(err => {
-    //     resolve(err.response.data);
-    //   });
-    resolve(new User(dataset));
+    axios({
+      method: 'PATCH',
+      url: `auth/profile`,
+      headers: apiHeader(),
+      data: dataset
+    }).then(res => {
+      if (res.status == 200) {
+        resolve(new User(res.data));
+      } else {
+        reject(res.statusText);
+      }
+    }).catch(err => {
+      reject(err.response.data);
+    });
   });
 }
 
