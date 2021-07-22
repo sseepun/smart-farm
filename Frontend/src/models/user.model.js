@@ -1,8 +1,8 @@
 export class User {
   constructor(data) {
-    this.id = data.id;
-    this.username = data.username;
-    this.email = data.email;
+    this.id = data._id? data._id: null;
+    this.username = data.username? data.username: null;
+    this.email = data.email? data.email: null;
     this.avatar = data.avatar? data.avatar: '/assets/img/avatar/22.png';
     this.isAdmin = data.is_admin? true: false;
     this.detail = data.detail? {

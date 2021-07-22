@@ -31,12 +31,7 @@ exports.refreshToken = async (req, res) => {
 
         await user.updateOne({refresh_token: refreshToken}, []);
         res.status(200).send({
-          id: user._id,
-          username: user.username,
-          email: user.email,
-          avatar: user.avatar,
-          is_admin: user.is_admin,
-          detail: user.detail,
+          user: user,
           access_token: accessToken,
           refresh_token: refreshToken
         });
@@ -76,18 +71,13 @@ exports.signin = async (req, res) => {
     });
 
     const userCallback = await db.User.findById(sanitize(user._id));
+    await userCallback.updateOne({refresh_token: refreshToken}, []);
     if (!userCallback.status) {
       return res.status(403).send({message: 'User is deactivated.'});
     }
 
-    await userCallback.updateOne({refresh_token: refreshToken}, []);
     res.status(200).send({
-      id: user._id,
-      username: user.username,
-      email: user.email,
-      avatar: user.avatar,
-      is_admin: user.is_admin,
-      detail: user.detail,
+      user: user,
       access_token: accessToken,
       refresh_token: refreshToken
     });
@@ -96,7 +86,7 @@ exports.signin = async (req, res) => {
   }
 };
 
-// Sign In
+// Profile Update
 exports.profileUpdate = async (req, res) => {
   try {
     const data = req.body;
@@ -124,22 +114,15 @@ exports.profileUpdate = async (req, res) => {
       lastname: data.detail.lastname
     }, []);
     
-    const user = await db.User.findById(sanitize(data.id));
-    await user.updateOne({
+    const update = await db.User.findById(sanitize(data.id));
+    await update.updateOne({
       username: data.username,
       email: data.email,
       avatar: data.avatar
     }, []);
     
-    const result = await db.User.findById(req.user_id).populate('detail');
-    res.status(200).send({
-      id: result._id,
-      username: result.username,
-      email: result.email,
-      avatar: result.avatar,
-      is_admin: result.is_admin,
-      detail: result.detail
-    });
+    const user = await db.User.findById(req.user_id).populate('detail');
+    res.status(200).send(user);
   } catch (err) {
     return res.status(500).send({message: 'Internal server error.'});
   }

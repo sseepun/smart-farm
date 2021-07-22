@@ -103,3 +103,5 @@ body:not(.theme-full) .main-content .middle-sidebar-bottom.header-padding{paddin
 @media screen and (max-width:575.98px){
     .p-adaptive{padding:15px!important;}
 }
+
+.bcolor-current{border:2px solid var(--theme-color);}

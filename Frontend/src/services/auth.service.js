@@ -22,7 +22,7 @@ function signin(input) {
     }).then(res => {
       if (res.status == 200) {
         resolve({
-          user: new User(res.data),
+          user: new User(res.data.user),
           accessToken: res.data.access_token,
           refreshToken: res.data.refresh_token
         });
@@ -47,7 +47,7 @@ function refreshToken(token) {
     }).then(res => {
       if (res.status == 200) {
         resolve({
-          user: new User(res.data),
+          user: new User(res.data.user),
           accessToken: res.data.access_token,
           refreshToken: res.data.refresh_token
         });

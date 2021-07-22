@@ -13,7 +13,9 @@ export const alert = {
 
   // Asynchronous 
   actions: {
-    
+    updateAlert({ dispatch, commit }, input) {
+      commit('update', input);
+    },
   },
 
   // Synchronous

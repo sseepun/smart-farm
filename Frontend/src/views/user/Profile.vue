@@ -21,7 +21,6 @@
                       {{user.detail.firstname}} {{user.detail.lastname}}
                     </span>
                     <span v-else>{{user.username}}</span>
-                    <i class="ti-check font-xssss btn-round-xs bg-success text-white ml-2"></i>
                   </h4>
                   <span class="font-xss fw-500 text-grey-500 d-inline-block ml-0">
                     {{user.email}}

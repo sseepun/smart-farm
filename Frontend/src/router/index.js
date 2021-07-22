@@ -25,12 +25,14 @@ const routes = [
     component: () => import('../views/user/Dashboard.vue'),
     beforeEnter: (to, from, next) => guardIsUser(to, from, next)
   },
+
   {
     path: '/user/farm/:id?',
     name: 'UserFarmPage',
     component: () => import('../views/user/Farm.vue'),
     beforeEnter: (to, from, next) => guardIsUser(to, from, next)
   },
+
   {
     path: '/user/profile',
     name: 'UserProfilePage',
@@ -43,6 +45,7 @@ const routes = [
     component: () => import('../views/user/ProfileUpdate.vue'),
     beforeEnter: (to, from, next) => guardIsUser(to, from, next)
   },
+
   {
     path: '/user/settings',
     name: 'UserSettingsPage',
@@ -65,6 +68,20 @@ const routes = [
     component: () => import('../views/admin/Dashboard.vue'),
     beforeEnter: (to, from, next) => guardIsAdmin(to, from, next)
   },
+
+  {
+    path: '/admin/users',
+    name: 'AdminUsersPage',
+    component: () => import('../views/admin/Users.vue'),
+    beforeEnter: (to, from, next) => guardIsAdmin(to, from, next)
+  },
+  {
+    path: '/admin/user/:process/:id?',
+    name: 'AdminUserPage',
+    component: () => import('../views/admin/User.vue'),
+    beforeEnter: (to, from, next) => guardIsAdmin(to, from, next)
+  },
+
   {
     path: '/admin/profile',
     name: 'AdminProfilePage',
@@ -77,6 +94,7 @@ const routes = [
     component: () => import('../views/admin/ProfileUpdate.vue'),
     beforeEnter: (to, from, next) => guardIsAdmin(to, from, next)
   },
+
   {
     path: '/admin/settings',
     name: 'AdminSettingsPage',
