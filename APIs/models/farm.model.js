@@ -4,10 +4,10 @@ const sanitizerPlugin = require('mongoose-sanitizer-plugin');
 const Farm = mongoose.model(
   'farm',
   new mongoose.Schema({
-    user: [{
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
-    }],
+    },
     name: String,
     description: String,
     created_at: String,

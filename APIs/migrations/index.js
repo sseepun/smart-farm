@@ -23,8 +23,7 @@ exports.initial = async () => {
       await admin.save();
       console.log("Created 'admin' user successful.");   
     }
-  }
-  catch (err) {
+  } catch (err) {
     console.log(err)
   }
 }
