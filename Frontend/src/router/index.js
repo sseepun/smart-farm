@@ -56,6 +56,16 @@ const routes = [
     beforeEnter: (to, from, next) => guardIsUser(to, from, next)
   },
 
+
+  // Admin Pages
+  { path: '/admin', redirect: '/admin/dashboard' },
+  {
+    path: '/admin/dashboard',
+    name: 'AdminDashboardPage',
+    component: () => import('../views/admin/Dashboard.vue'),
+    beforeEnter: (to, from, next) => guardIsAdmin(to, from, next)
+  },
+
 ];
 
 const router = createRouter({

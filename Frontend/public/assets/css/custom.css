@@ -75,12 +75,6 @@ body:not(.theme-full) .main-content .middle-sidebar-bottom.header-padding{paddin
 
 
 /* Utility */
-.d-block{display:block!important;}
-.d-flex{display:flex!important;}
-.d-inline{display:inline!important;}
-.d-inline-block{display:inline-block!important;}
-.d-none{display:none!important;}
-
 .jc-start{justify-content:flex-start!important;}
 .jc-center{justify-content:center!important;}
 .jc-end{justify-content:flex-end!important;}
