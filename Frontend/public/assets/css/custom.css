@@ -104,4 +104,8 @@ body:not(.theme-full) .main-content .middle-sidebar-bottom.header-padding{paddin
     .p-adaptive{padding:15px!important;}
 }
 
-.bcolor-current{border:2px solid var(--theme-color);}
+
+/* Colors */
+.bcolor-white{border:2px solid #ffffff!important;}
+.bcolor-white-4{border:4px solid #ffffff!important;}
+.bcolor-current{border:2px solid var(--theme-color)!important;}

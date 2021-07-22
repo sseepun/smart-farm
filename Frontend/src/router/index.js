@@ -83,6 +83,25 @@ const routes = [
   },
 
   {
+    path: '/admin/farms',
+    name: 'AdminFarmsPage',
+    component: () => import('../views/admin/Farms.vue'),
+    beforeEnter: (to, from, next) => guardIsAdmin(to, from, next)
+  },
+  {
+    path: '/admin/farm/:process/:id?',
+    name: 'AdminFarmPage',
+    component: () => import('../views/admin/Farm.vue'),
+    beforeEnter: (to, from, next) => guardIsAdmin(to, from, next)
+  },
+  {
+    path: '/admin/farm/:process/:id?/:source?',
+    name: 'AdminFarmPage',
+    component: () => import('../views/admin/Farm.vue'),
+    beforeEnter: (to, from, next) => guardIsAdmin(to, from, next)
+  },
+
+  {
     path: '/admin/profile',
     name: 'AdminProfilePage',
     component: () => import('../views/admin/Profile.vue'),

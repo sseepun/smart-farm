@@ -18,7 +18,7 @@ function _list(input) {
       method: 'GET',
       url: `user/list`,
       headers: apiHeader(),
-      data: input
+      params: input
     }).then(res => {
       if (res.status == 200) {
         resolve(res.data.map(function(d){

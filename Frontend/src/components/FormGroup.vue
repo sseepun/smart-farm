@@ -1,6 +1,27 @@
 <template>
 
-  <div v-if="type == 'number'" class="form-group" :class="selfClass">
+  <div v-if="type == 'select'" class="form-group" :class="selfClass">
+    <label v-if="label" class="fw-600 font-xss mb-1">
+      {{label}} <span v-if="required" class="text-danger">*</span>
+    </label>
+    <i v-if="iconPrepend && icon" class="font-xs text-grey-500 pr-0" :class="icon"></i>
+    <select 
+      class="form-control text-grey-900" 
+      :class="{ 'pl-5': iconPrepend, 'pr-5': iconAppend }" 
+      v-model="value" @change="(event)=>$emit('input', event.target.value)" 
+      :required="required? true: false" 
+      :readonly="readonly? true: false" 
+      :disabled="disabled? true: false" 
+    >
+      <option value=""></option>
+      <option v-for="(option, i) in options" :key="i" :value="option.value">
+        {{option.display}}
+      </option>
+    </select>
+    <i v-if="iconAppend && icon" class="font-xs text-grey-500 pr-0" :class="icon"></i>
+  </div>
+
+  <div v-else-if="type == 'number'" class="form-group" :class="selfClass">
     <label v-if="label" class="fw-600 font-xss mb-1">
       {{label}} <span v-if="required" class="text-danger">*</span>
     </label>
@@ -59,6 +80,8 @@ export default {
     min: { type: [String, Number], default: '' },
     max: { type: [String, Number], default: '' },
     step: { type: [String, Number], default: '' },
+    
+    options: { type: Array, default: [] },
   },
   data() {
     return {

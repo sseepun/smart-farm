@@ -44,7 +44,7 @@ export const user = {
       return new Promise((resolve, reject) => {
         userService.create(input)
           .then(data => {
-            commit('alert/update', { type: 'Success', message: 'สร้างบัญชีผู้ใช้ใหม่เรียบร้อย' }, { root: true });
+            commit('alert/update', { type: 'Success', message: 'สร้างบัญชีผู้ใช้เรียบร้อยแล้ว' }, { root: true });
             resolve(data);
           })
           .catch(err => {
@@ -57,7 +57,7 @@ export const user = {
       return new Promise((resolve, reject) => {
         userService.update(input)
           .then(data => {
-            commit('alert/update', { type: 'Success', message: 'แก้ไขบัญชีผู้ใช้ใหม่เรียบร้อย' }, { root: true });
+            commit('alert/update', { type: 'Success', message: 'แก้ไขบัญชีผู้ใช้เรียบร้อยแล้ว' }, { root: true });
             resolve(data);
           })
           .catch(err => {
@@ -70,7 +70,7 @@ export const user = {
       return new Promise((resolve, reject) => {
         userService._delete(input)
           .then(data => {
-            commit('alert/update', { type: 'Warning', message: 'ลบบัญชีผู้ใช้ใหม่เรียบร้อย' }, { root: true });
+            commit('alert/update', { type: 'Warning', message: 'ลบบัญชีผู้ใช้เรียบร้อยแล้ว' }, { root: true });
             resolve(data);
           })
           .catch(err => {

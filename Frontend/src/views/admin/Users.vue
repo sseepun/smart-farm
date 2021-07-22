@@ -10,7 +10,7 @@
 
           <div class="d-flex ai-center jc-space-between">
             <h2 class="fw-600 font-lg m-0">บัญชีผู้ใช้</h2>
-            <router-link to="/admin/user/create" class="btn px-4 py-2 m-0 bg-current font-xsss fw-500 text-white">
+            <router-link to="/admin/user/create" class="btn px-3 py-2 m-0 bg-current font-xsss fw-500 text-white">
               เพิ่มผู้ใช้
             </router-link>
           </div>

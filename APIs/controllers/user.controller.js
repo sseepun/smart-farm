@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs');
 // List
 exports.list = async (req, res) => {
   try {
-    const data = req.body;
+    const data = req.query;
     const users = await db.User.find().populate('detail');
     res.status(200).send(users);
   } catch (err) {

@@ -1,6 +1,6 @@
 <template>
 
-  <nav v-if="user" class="navigation scroll-bar">
+  <nav v-if="user && url" class="navigation scroll-bar">
     <div class="container pl-0 pr-0">
       <div class="nav-content">
         <div class="nav-top pl-4 pr-3">
@@ -100,7 +100,7 @@
     </div>
   </nav>
   
-  <div v-if="user" class="app-footer border-0 shadow-lg" style="justify-content:space-evenly;">
+  <div v-if="user && url" class="app-footer border-0 shadow-lg" style="justify-content:space-evenly;">
     <!-- Admin -->
     <template v-if="user.isAdmin">
       <router-link
@@ -168,7 +168,7 @@ export default {
   },
   data() {
     return {
-      url: '/user'
+      url: ''
     };
   },
   computed: {
@@ -178,6 +178,7 @@ export default {
   },
   mounted() {
     if(this.user.isAdmin) this.url = '/admin';
+    else this.url = '/user';
   },
   methods: {
     closeNav() {

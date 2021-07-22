@@ -15,28 +15,66 @@ export const farm = {
 
   // Asynchronous 
   actions: {
-    getList({ dispatch, commit }, { user }) {
+    getList({ dispatch, commit }, input) {
       return new Promise((resolve, reject) => {
-        farmService._list({ userId: user.id })
+        farmService._list(input)
           .then(data => {
             commit('getListSuccess', data);
             resolve(data);
           })
           .catch(err => {
-            console.log(err);
             reject(err);
           });
       });
     },
-    getSingle({ dispatch, commit }, { user, farmId }) {
+    getSingle({ dispatch, commit }, input) {
       return new Promise((resolve, reject) => {
-        farmService.read({ userId: user.id, id: farmId })
+        farmService.read(input)
           .then(data => {
             commit('getSingleSuccess', data);
             resolve(data);
           })
           .catch(err => {
-            console.log(err);
+            reject(err);
+          });
+      });
+    },
+
+    create({ dispatch, commit }, input) {
+      return new Promise((resolve, reject) => {
+        farmService.create(input)
+          .then(data => {
+            commit('alert/update', { type: 'Success', message: 'สร้างฟาร์มเรียบร้อยแล้ว' }, { root: true });
+            resolve(data);
+          })
+          .catch(err => {
+            commit('alert/update', { type: 'Warning', message: err.message }, { root: true });
+            reject(err);
+          });
+      });
+    },
+    update({ dispatch, commit }, input) {
+      return new Promise((resolve, reject) => {
+        farmService.update(input)
+          .then(data => {
+            commit('alert/update', { type: 'Success', message: 'แก้ไขฟาร์มเรียบร้อยแล้ว' }, { root: true });
+            resolve(data);
+          })
+          .catch(err => {
+            commit('alert/update', { type: 'Warning', message: err.message }, { root: true });
+            reject(err);
+          });
+      });
+    },
+    delete({ dispatch, commit }, input) {
+      return new Promise((resolve, reject) => {
+        farmService._delete(input)
+          .then(data => {
+            commit('alert/update', { type: 'Warning', message: 'ลบฟาร์มเรียบร้อยแล้ว' }, { root: true });
+            resolve(data);
+          })
+          .catch(err => {
+            commit('alert/update', { type: 'Warning', message: err.message }, { root: true });
             reject(err);
           });
       });

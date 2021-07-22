@@ -40,23 +40,9 @@ isAdmin = async (req, res, next) => {
   }
 };
 
-isFarmBelongToUser = async (req, res, next) => {
-  try {
-    const farm = await db.Farm.findById(sanitize(req.params.farm_id)).populate('user')
-    if (farm.user.is_admin || (farm.user._id).toString() === req.user_id) {
-      return next();
-    }
-    return res.status(403).send({message: 'No permission.'});
-  }
-  catch (err) {
-    return res.status(500).send({message: 'Internal server error.'});
-  }
-}
-
 const authJwt = {
   verifyToken,
-  isAdmin,
-  isFarmBelongToUser
+  isAdmin
 };
 
 module.exports = authJwt;
