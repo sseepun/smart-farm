@@ -69,11 +69,15 @@ export default {
       that.mqttConnect(data);
     });
   },
+  beforeUnmount() {
+    this.mqttDisconnect(this.farm);
+  },
   methods: {
     ...mapActions({
       updateAlert: 'alert/updateAlert',
       getFarm: 'farm/getSingle',
-      mqttConnect: 'mqtt/connect'
+      mqttConnect: 'mqttConn/connect',
+      mqttDisconnect: 'mqttConn/disconnect'
     }),
 
     changeProcess(process) {

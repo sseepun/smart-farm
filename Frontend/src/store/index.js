@@ -4,7 +4,7 @@ import { auth } from './auth.store'
 import { alert } from './alert.store'
 import { user } from './user.store'
 import { farm } from './farm.store'
-import { mqtt } from './mqtt.store'
+import { mqttConn } from './mqtt-conn.store'
 
 const store = createStore({
   modules: {
@@ -12,7 +12,7 @@ const store = createStore({
     alert,
     user,
     farm,
-    mqtt
+    mqttConn
   }
 })
 
