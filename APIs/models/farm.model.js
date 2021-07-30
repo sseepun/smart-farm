@@ -10,6 +10,8 @@ const Farm = mongoose.model(
     },
     name: String,
     description: String,
+    avatar: String,
+    node_id: String,
     created_at: String,
     updated_at: String,
   }, { timestamps: true }).plugin(sanitizerPlugin)

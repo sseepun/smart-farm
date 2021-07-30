@@ -45,25 +45,47 @@ server = app.listen(PORT, () => {
 });
 
 
+// MQTT server
+// var mqtt = require('mqtt');
+// var mqttClient = mqtt.connect({
+//   host: process.env.MQTT_SERVER,
+//   port: process.env.MQTT_PORT,
+//   username: process.env.MQTT_USERNAME,
+//   password: process.env.MQTT_PASSWORD
+// });
+// console.log(mqttClient)
+
+// mqttClient.on('connect', function() {
+//   console.log('MQTT server connected');
+//   mqttClient.subscribe('001/message', function (err) {
+//     console.log(err);
+//   });
+// });
+
+// mqttClient.on('message', function (topic, message) {
+//   console.log(topic, message.toString());
+// });
+
+
 // Socket.io
-const io = require('socket.io')(server, {
-  cors: {
-    origin: /localhost$/,
-    methods: ['GET', 'POST'],
-    credentials: false
-  }
-});
+// const io = require('socket.io')(server, {
+//   cors: {
+//     origin: /localhost$/,
+//     methods: ['GET', 'POST'],
+//     credentials: false
+//   }
+// });
 
-io.on('connection', (socket) => {
-  socket.on('join', (data) => {
-    console.log(data);
-    socket.join(data);
-  });
+// io.on('connection', (socket) => {
+//   socket.on('join', (data) => {
+//     console.log(data);
+//     socket.join(data);
+//   });
 
-  socket.on('disconnect', () => {
-    console.log('Diasdasdsd')
-  });
-});
+//   socket.on('disconnect', () => {
+//     console.log('Diasdasdsd')
+//   });
+// });
 
 
 // Connect to database

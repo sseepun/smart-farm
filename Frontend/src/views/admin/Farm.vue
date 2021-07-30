@@ -38,6 +38,12 @@
                           :value="dataset.user.id" @input="dataset.user.id = $event" 
                         />
                       </div>
+                      <div class="col-sm-12 mb-3">
+                        <FormGroup
+                          type="text" label="รหัส Node MCU" :required="true" 
+                          :value="dataset.nodeId" @input="dataset.nodeId = $event" 
+                        />
+                      </div>
                       
                       <div class="col-sm-12 mb-0 mt-2">
                         <ButtonSubmit label="สร้างฟาร์ม" classer="w200 bg-current border-0 p-0" />
@@ -89,6 +95,12 @@
                           type="select" label="เจ้าของฟาร์ม" :required="true" 
                           :options="userListOptions()" 
                           :value="farm.user.id" @input="farm.user.id = $event" 
+                        />
+                      </div>
+                      <div class="col-sm-12 mb-3">
+                        <FormGroup
+                          type="text" label="รหัส Node MCU" :required="true" 
+                          :value="farm.nodeId" @input="farm.nodeId = $event" 
                         />
                       </div>
                       

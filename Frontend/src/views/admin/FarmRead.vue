@@ -60,18 +60,20 @@ export default {
   },
   mounted() {
     onMounted();
-    if(this.source) {
-      if(this.source == 'user') this.navActiveIndex = 1;
-      else if(this.source == 'profile') this.navActiveIndex = 3;
+    var that = this;
+    if(that.source) {
+      if(that.source == 'user') that.navActiveIndex = 1;
+      else if(that.source == 'profile') that.navActiveIndex = 3;
     }
-    this.getFarm({ farmId: this.farmId });
-    this.socketTest();
+    that.getFarm({ farmId: that.farmId }).then(function(data){
+      that.mqttConnect(data);
+    });
   },
   methods: {
     ...mapActions({
       updateAlert: 'alert/updateAlert',
       getFarm: 'farm/getSingle',
-      socketTest: 'socket/testConnection'
+      mqttConnect: 'mqtt/connect'
     }),
 
     changeProcess(process) {

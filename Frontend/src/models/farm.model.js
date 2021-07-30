@@ -6,6 +6,7 @@ export class Farm {
     this.name = data.name? data.name: null;
     this.description = data.description? data.description: null;
     this.avatar = data.avatar? data.avatar: '/assets/img/bg/02.jpg';
+    this.nodeId = data.node_id? data.node_id: null;
 
     this.user = data.user? {
       id: data.user._id? data.user._id: null,

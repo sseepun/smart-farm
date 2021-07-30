@@ -37,7 +37,8 @@ exports.create = async (req, res) => {
       name: data.name, 
       description: data.description,
       avatar: data.avatar,
-      user: user
+      user: user,
+      node_id: data.nodeId
     }).save();
     
     res.status(200).send(true);
@@ -65,7 +66,8 @@ exports.update = async (req, res) => {
     const update = await db.Farm.findById(sanitize(data.id));
     await update.updateOne({
       name: data.name,
-      description: data.description
+      description: data.description,
+      node_id: data.nodeId
     }, []);
     res.status(200).send(true);
   } catch (err) {
