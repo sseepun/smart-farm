@@ -90,7 +90,7 @@
         <div class="middle-sidebar-bottom header-padding pb-4" data-aos="fade-up" data-aos-delay="0">
           <div class="middle-sidebar-left pr-0">
 
-            <div class="card d-block w-100 border-0 shadow-xss rounded-lg overflow-hidden mb-3" style="background:url('/assets/img/bg/02.jpg') center/cover;">
+            <div class="card d-block w-100 border-0 shadow-xss rounded-lg overflow-hidden m-0 mb-1" style="background:url('/assets/img/bg/02.jpg') center/cover;">
               <div class="card-body p-lg-5 p-4" style="background:rgba(0,0,0,.7);">
                 <div class="clearfix"></div>
                 <div class="row ai-end pb-4">
