@@ -16,10 +16,7 @@
                     class="btn px-1 py-0 m-0 bg-current font-xsss fw-500 text-white ml-1" 
                     href="javascript:" @click="refreshData()"
                   >
-                    <i 
-                      class="feather-loader" 
-                      style="display:inline-block; transform:translateY(1.5px);"
-                    ></i>
+                    รีเฟรช
                   </a>
                 </h2>
                 <h6 class="font-xsss text-grey-600 fw-400 m-0 mt-1">
@@ -107,6 +104,9 @@
                       textInactive="ปิด" textActive="เปิด" :value="springleValue" 
                       @change="springleValue = $event"
                     />
+                  </div>
+                  <div class="mt-4">
+                    {{mqttLatestData}}
                   </div>
                 </div>
               </div>
@@ -301,7 +301,7 @@ export default {
               name: { show: false },
               value: {
                 formatter: function(val) {
-                  return Math.round(val * 100) / 100;
+                  return (Math.round(val * 100) / 100) + ' %';
                 },
                 fontSize: '28px',
                 fontWeight: '600',
@@ -319,6 +319,9 @@ export default {
       this.meterChart01.render();
       this.meterChart02 = new ApexCharts(this.$refs['meterChart02'], options);
       this.meterChart02.render();
+      options.plotOptions.radialBar.dataLabels.value.formatter = function(val) {
+        return (Math.round(val * 100) / 100) + ' ℃';
+      }
       this.meterChart03 = new ApexCharts(this.$refs['meterChart03'], options);
       this.meterChart03.render();
     },
