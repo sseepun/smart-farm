@@ -99,14 +99,11 @@
                       <SimpleTag v-else type="Danger" label="ปิด" />
                     </h4>
                   </div>
-                  <div class="mt-3">
+                  <div class="mt-3" :class="{ 'disabled': mqttConfig && mqttConfig.opmode }">
                     <SwitchToggle 
                       textInactive="ปิด" textActive="เปิด" :value="springleValue" 
-                      @change="springleValue = $event"
+                      @change="onChangeSpringleValue($event)"
                     />
-                  </div>
-                  <div class="mt-4">
-                    {{mqttLatestData}}
                   </div>
                 </div>
               </div>
@@ -121,16 +118,17 @@
                   <div class="mt-3">
                     <SwitchToggle 
                       textInactive="ควบคุมเอง" textActive="อัตโนมัติ" :value="autoMode" 
+                      @change="autoMode = $event" 
                     />
                   </div>
-                  <form @submit.prevent="onSubmit">
+                  <form @submit.prevent="onSubmitConfig">
                     <table class="table-setup mt-4">
                       <tr>
                         <td><div class="font-xs text-black">ค่าต่ำสุด</div></td>
                         <td>
                           <FormGroup 
-                            type="number" :min="0" :max="100" :step="1" 
-                            :value="soilmin" 
+                            type="number" :min="0" :max="soilmax" :step="1" 
+                            :value="soilmin" @change="soilmin = $event.target.value" 
                           />
                         </td>
                         <td rowspan="2">
@@ -141,8 +139,8 @@
                         <td><div class="font-xs text-black">ค่าสูงสุด</div></td>
                         <td>
                           <FormGroup 
-                            type="number" :min="0" :max="100" :step="1" 
-                            :value="soilmax" 
+                            type="number" :min="soilmin" :max="100" :step="1" 
+                            :value="soilmax" @change="soilmax = $event.target.value" 
                           />
                         </td>
                       </tr>
@@ -160,6 +158,10 @@
 
   </div>
 </template>
+
+<style scoped>
+  .disabled{opacity:.4; pointer-events:none;}
+</style>
 
 <script>
 import { onMounted } from '../../helpers/frontend';
@@ -240,7 +242,9 @@ export default {
       getFarm: 'farm/getSingle',
       mqttConnect: 'mqttConn/connect',
       mqttDisconnect: 'mqttConn/disconnect',
-      mqttRefreshData: 'mqttConn/refreshData'
+      mqttRefreshData: 'mqttConn/refreshData',
+      mqttSpringleCommand: 'mqttConn/springleCommand',
+      mqttConfigCommand: 'mqttConn/configCommand'
     }),
 
     makeCopy(val) {
@@ -335,7 +339,19 @@ export default {
       if(this.mqttLatestData.te >= 0) {
         this.meterChart03.updateSeries([ this.mqttLatestData.te ]);
       }
-    }
+    },
+
+    onChangeSpringleValue(value) {
+      this.springleValue = value;
+      this.mqttSpringleCommand(value);
+    },
+    onSubmitConfig() {
+      this.mqttConfigCommand({
+        soilmin: this.soilmin, 
+        soilmax: this.soilmax, 
+        opmode: this.autoMode
+      });
+    } 
   }
 }
 </script>

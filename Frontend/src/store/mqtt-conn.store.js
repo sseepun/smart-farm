@@ -35,15 +35,16 @@ export const mqttConn = {
       });
       mqttClient.on('message', function(topic, message, packet){
         var topics = topic.split('/');
+        commit('alert/updateLoading', false, { root: true });
         if(state.debug) console.log(topics, message.toString());
-        if(topics.length == 2 && topics[0] == state.farm.nodeId) {
-          if(topics[1] == 'message') {
-            var data = JSON.parse(message.toString());
-            commit('updateDataList', data);
-          } else if(topics[1] == 'config') {
-            var data = JSON.parse(message.toString());
-            commit('updateConfig', data);
-          }
+        if(topics[1] == 'message') {
+          var data = JSON.parse(message.toString());
+          if(data.id == state.farm.nodeId) commit('updateDataList', data);
+        } else if(topics[1] == 'config') {
+          var data = JSON.parse(message.toString());
+          if(topics[0] == state.farm.nodeId) commit('updateConfig', data);
+        } else if(topics[1] == 'ack') {
+          dispatch('refreshData');
         }
       });
     },
@@ -93,7 +94,19 @@ export const mqttConn = {
         if(state.debug) console.log(`MQTT ${state.farm.nodeId} refresh data`);
         state.mqttClient.publish(`${state.farm.nodeId}/command`, 'qe');
       }
-    }
+    },
+
+    springleCommand({ commit, state }, input) {
+      commit('alert/updateLoading', true, { root: true });
+      state.mqttClient.publish(`${state.farm.nodeId}/command`, input? 'v1': 'v2');
+    },
+    configCommand({ commit, state }, input) {
+      commit('alert/updateLoading', true, { root: true });
+      state.mqttClient.publish(
+        `${state.farm.nodeId}/config`, 
+        JSON.stringify(input), { retain: true }
+      );
+    },
     
   },
   

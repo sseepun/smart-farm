@@ -1,4 +1,5 @@
 <template>
+
   <div
     class="alert-popup"
     :class="{ 
@@ -16,6 +17,13 @@
       </div>
     </div>
   </div>
+
+  <div class="alert-loading" :class="{ 'active': alertLoading }">
+    <div class="wrapper">
+      <h1 class="fw-600 mb-0">กำลังโหลดข้อมูล...</h1>
+    </div>
+  </div>
+
 </template>
 
 <script>
@@ -33,6 +41,7 @@ export default {
   computed: {
     ...mapGetters({
       alert: 'alert/value',
+      alertLoading: 'alert/loading',
     })
   },
   watch: { 

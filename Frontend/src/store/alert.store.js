@@ -4,17 +4,22 @@ export const alert = {
 
   state: {
     value: { type: null, message: null },
+    loading: false,
     timeout: null
   },
 
   getters: {
-    value: state => state.value
+    value: state => state.value,
+    loading: state => state.loading
   },
 
   // Asynchronous 
   actions: {
     updateAlert({ dispatch, commit }, input) {
       commit('update', input);
+    },
+    updateLoading({ dispatch, commit }, input) {
+      commit('updateLoading', input);
     },
   },
 
@@ -26,6 +31,9 @@ export const alert = {
       state.timeout = setTimeout(function(){
         state.value = { type: null, message: null };
       }, 3400);
+    },
+    updateLoading(state, value) {
+      state.loading = value;
     }
   }
 

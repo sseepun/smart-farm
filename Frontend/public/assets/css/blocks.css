@@ -21,6 +21,15 @@
 .alert-popup h6{font-size:1.0625rem; font-weight:500; margin:0; color:#ffffff;}
 .alert-popup p{font-size:.9375rem; font-weight:300; margin:.125rem 0 0 0; color:#ffffff;}
 
+/* Alert Loading */
+.alert-loading{
+    position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:99;
+    display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.25);
+    opacity:0; pointer-events:none; transition:opacity .25s;
+}
+.alert-loading.active{opacity:1; pointer-events:auto;}
+.alert-loading > .wrapper{border-radius:.25rem; padding:1.75rem; background:#ffffff;}
+
 
 /* Auth 01 */
 .auth-01{
