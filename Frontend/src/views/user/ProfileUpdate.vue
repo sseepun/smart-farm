@@ -33,13 +33,13 @@
                     </div>
                     <div class="col-sm-6 mb-3">
                       <FormGroup
-                        type="text" label="ชื่อผู้ใช้" :required="true" 
+                        type="text" label="ชื่อผู้ใช้" :required="true" :disabled="true" 
                         :value="dataset.username" @input="dataset.username = $event" 
                       />
                     </div>
                     <div class="col-sm-6 mb-3">
                       <FormGroup
-                        type="email" label="อีเมล" :required="true" 
+                        type="email" label="อีเมล" :required="true" :disabled="true" 
                         :value="dataset.email" @input="dataset.email = $event" 
                       />
                     </div>
@@ -82,7 +82,7 @@ export default {
   name: 'UserProfileUpdatePage',
   data() {
     return {
-      navActiveIndex: 3,
+      navActiveIndex: 1,
       dataset: null
     };
   },

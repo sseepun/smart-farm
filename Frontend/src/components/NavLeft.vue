@@ -69,15 +69,6 @@
           <li class="logo d-none d-xl-block d-lg-block"></li>
           <li>
             <router-link
-              :to="this.url+'/dashboard'" class="nav-content-bttn m-0" 
-              :class="{ 'active': activeIndex == 0 }"
-            >
-              <i class="feather-home font-sm mr-3"></i>
-              <span class="fw-500 font-xss">ฟาร์มของฉัน</span>
-            </router-link>
-          </li>
-          <li>
-            <router-link
               :to="this.url+'/profile'" class="nav-content-bttn m-0" 
               :class="{ 'active': activeIndex == 1 }"
             >

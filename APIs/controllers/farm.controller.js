@@ -63,10 +63,17 @@ exports.read = async (req, res) => {
 exports.update = async (req, res) => {
   try {
     const data = req.body;
+
+    const user = await db.User.findById(sanitize(data.user.id));
+    if(!user) {
+      return res.status(409).send({message: 'User not found.'});
+    }
+
     const update = await db.Farm.findById(sanitize(data.id));
     await update.updateOne({
       name: data.name,
       description: data.description,
+      user: user,
       node_id: data.nodeId
     }, []);
     res.status(200).send(true);

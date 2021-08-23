@@ -58,7 +58,7 @@ exports.signin = async (req, res) => {
     let passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
     if (!req.body.password || !passwordIsValid) {
       return res.status(401).send({
-        accessToken: null,
+        accessToken: null, 
         message: 'Invalid username or password.'
       });
     }
@@ -86,7 +86,7 @@ exports.signin = async (req, res) => {
   }
 };
 
-// Profile Update
+// Profile
 exports.profileUpdate = async (req, res) => {
   try {
     const data = req.body;
@@ -123,6 +123,30 @@ exports.profileUpdate = async (req, res) => {
     
     const user = await db.User.findById(req.user_id).populate('detail');
     res.status(200).send(user);
+  } catch (err) {
+    return res.status(500).send({message: 'Internal server error.'});
+  }
+};
+
+// Password
+exports.passwordUpdate = async (req, res) => {
+  try {
+    const data = req.body;
+    
+    const user = await db.User.findById(sanitize(req.user_id));
+    if(!user) {
+      return res.status(409).send({message: 'User not found.'});
+    }
+    
+    let passwordIsValid = bcrypt.compareSync(data.password, user.password);
+    if (!passwordIsValid) {
+      return res.status(409).send({message: 'Invalid password'});
+    }
+    
+    await user.updateOne({
+      password: bcrypt.hashSync(data.newPassword, 8)
+    }, []);
+    return res.status(200).send(user);
   } catch (err) {
     return res.status(500).send({message: 'Internal server error.'});
   }

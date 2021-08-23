@@ -19,15 +19,16 @@ const routes = [
 
   // User Pages
   { path: '/user', redirect: '/user/dashboard' },
-  {
-    path: '/user/dashboard',
-    name: 'UserDashboardPage',
-    component: () => import('../views/user/Dashboard.vue'),
-    beforeEnter: (to, from, next) => guardIsUser(to, from, next)
-  },
+  { path: '/user/dashboard', redirect: '/user/profile' },
 
   {
-    path: '/user/farm/:id?',
+    path: '/user/farm/read/:id',
+    name: 'UserFarmReadPage',
+    component: () => import('../views/user/FarmRead.vue'),
+    beforeEnter: (to, from, next) => guardIsUser(to, from, next)
+  },
+  {
+    path: '/user/farm/:process/:id',
     name: 'UserFarmPage',
     component: () => import('../views/user/Farm.vue'),
     beforeEnter: (to, from, next) => guardIsUser(to, from, next)
@@ -118,6 +119,12 @@ const routes = [
     path: '/admin/settings',
     name: 'AdminSettingsPage',
     component: () => import('../views/admin/Settings.vue'),
+    beforeEnter: (to, from, next) => guardIsAdmin(to, from, next)
+  },
+  {
+    path: '/admin/password-update',
+    name: 'AdminPasswordUpdatePage',
+    component: () => import('../views/admin/PasswordUpdate.vue'),
     beforeEnter: (to, from, next) => guardIsAdmin(to, from, next)
   },
 

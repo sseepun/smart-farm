@@ -81,18 +81,19 @@ function update(dataset) {
 
 function updatePassword(dataset) {
   return new Promise((resolve, reject) => {
-    // axios({
-    //   method: 'PATCH',
-    //   url: `${process.env.VUE_API_URL}farm_items/update`,
-    //   headers: apiHeader(),
-    //   data: dataset
-    // })
-    //   .then(res => {
-    //     resolve(res.data);
-    //   })
-    //   .catch(err => {
-    //     resolve(err.response.data);
-    //   });
-    resolve(true);
+    axios({
+      method: 'PATCH',
+      url: `auth/password`,
+      headers: apiHeader(),
+      data: dataset
+    }).then(res => {
+      if (res.status == 200) {
+        resolve(new User(res.data));
+      } else {
+        reject(res.statusText);
+      }
+    }).catch(err => {
+      reject(err.response.data);
+    });
   });
 }

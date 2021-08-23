@@ -27,5 +27,11 @@ module.exports = function(app) {
     AuthController.profileUpdate
   );
 
+  router.patch(
+    '/password',
+    [ authJwt.verifyToken ],
+    AuthController.passwordUpdate
+  );
+
   app.use('/auth', router);
 };

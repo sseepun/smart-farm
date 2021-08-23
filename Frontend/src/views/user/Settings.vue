@@ -14,13 +14,6 @@
 
                   <ul class="list-inline">
                     <li class="list-inline-item d-block border-bottom mr-0">
-                      <router-link to="/user/dashboard" class="pt-2 pb-2 d-flex">
-                        <i class="btn-round-md bg-primary-gradiant text-white feather-home font-md mr-3"></i> 
-                        <h4 class="fw-600 font-xss mb-0 mt-3">ฟาร์มของฉัน</h4>
-                        <i class="ti-angle-right font-xsss text-grey-500 ml-auto mt-3"></i>
-                      </router-link>
-                    </li>
-                    <li class="list-inline-item d-block border-bottom mr-0">
                       <router-link to="/user/profile-update" class="pt-2 pb-2 d-flex">
                         <i class="btn-round-md bg-gold-gradiant text-white feather-user font-md mr-3"></i> 
                         <h4 class="fw-600 font-xss mb-0 mt-3">แก้ไขข้อมูลส่วนตัว</h4>

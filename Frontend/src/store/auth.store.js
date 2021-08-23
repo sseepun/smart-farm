@@ -82,7 +82,7 @@ export const auth = {
               resolve(data);
             })
             .catch(err => {
-              console.log(err);
+              commit('alert/update', { type: 'Warning', message: err.message }, { root: true });
               reject(err);
             });
         }

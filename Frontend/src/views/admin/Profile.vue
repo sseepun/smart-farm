@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-xl-3 mt-4">
                   <router-link to="/admin/profile-update" class="btn px-4 py-2 m-0 bg-current font-xss fw-500 text-white">
-                    แก้ไขข้อมูลส่วนตัว
+                    แก้ไขข้อมูล
                   </router-link>
                 </div>
               </div>
