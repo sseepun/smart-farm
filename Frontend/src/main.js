@@ -24,5 +24,4 @@ app.component('NavTop', NavTop)
 
 store.dispatch('auth/checkSignin')
 store.dispatch('mqttConn/init')
-app.use(store)
 app.use(store).use(router).mount('#app')
