@@ -102,7 +102,8 @@
                   <div class="mt-3" :class="{ 'disabled': mqttConfig && mqttConfig.opmode }">
                     <SwitchToggle 
                       textInactive="ปิด" textActive="เปิด" :value="springleValue" 
-                      @change="onChangeSpringleValue($event)"
+                      @change="onChangeSpringleValue($event)" 
+                      :disabled="!mqttLatestData || mqttLatestData.op != springleValue" 
                     />
                   </div>
                 </div>

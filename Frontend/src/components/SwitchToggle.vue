@@ -1,8 +1,9 @@
 <template>
-  <div class="switch-toggle" :class="{ 'active': value }">
+  <div class="switch-toggle" :class="{ 'active': value, 'disabled': disabled }">
     <input 
       type="checkbox" :id="'switch_'+randomId" :checked="value? true: false"
       @change="(event)=>$emit('change', event.target.checked)" 
+      :disabled="disabled" 
     />
     <label class="switch-bar" :for="'switch_'+randomId"></label>
     <div class="swicth-texts">
@@ -19,6 +20,7 @@ export default {
     textInactive: { type: String, default: '' },
     textActive: { type: String, default: '' },
     value: { type: [String, Number, Boolean], default: '' },
+    disabled: { type: Boolean, default: false }
   },
   data() {
     return {

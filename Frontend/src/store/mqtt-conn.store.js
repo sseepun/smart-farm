@@ -120,8 +120,24 @@ export const mqttConn = {
     },
     updateGroupId(state, farm) {
       var nodeId = Number(farm.nodeId);
-      if(nodeId >= 1 && nodeId < 10) {
+      if(nodeId >= 1 && nodeId <= 10){
         state.groupId = '001';
+      }else if(nodeId >= 11 && nodeId <= 20){
+        state.groupId = '002';
+      }else if(nodeId >= 21 && nodeId <= 30){
+        state.groupId = '003';
+      }else if(nodeId >= 31 && nodeId <= 40){
+        state.groupId = '004';
+      }else if(nodeId >= 41 && nodeId <= 50){
+        state.groupId = '005';
+      }else if(nodeId >= 51 && nodeId <= 60){
+        state.groupId = '006';
+      }else if(nodeId >= 61 && nodeId <= 70){
+        state.groupId = '007';
+      }else if(nodeId >= 71 && nodeId <= 80){
+        state.groupId = '008';
+      }else if(nodeId >= 81 && nodeId <= 90){
+        state.groupId = '009';
       }
     },
     updateFarm(state, farm) {
